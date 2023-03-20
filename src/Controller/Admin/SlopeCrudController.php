@@ -17,15 +17,16 @@ class SlopeCrudController extends AbstractCrudController
         return Slope::class;
     }
 
+    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
-            TextField::new('difficulty'),
-            BooleanField::new('is_open'),
-            TextField::new('message'),
+            IdField::new('id'),
+            TextField::new('title'),
+            TextEditorField::new('description'),
         ];
     }
+    */
 
     public function createEntity(string $entityFqcn): Slope
     {
