@@ -14,7 +14,7 @@
     <ul class="station">
         {% for station in stations %}
             <div>
-                <li>{{ station.StationName }}</li>
+                <a href="{{ path('station_index', {'id': station.id}) }}"><li>{{ station.StationName }}</li></a>
             </div>
         {% endfor %}
     </ul>

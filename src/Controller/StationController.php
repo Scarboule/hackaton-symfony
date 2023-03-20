@@ -26,7 +26,6 @@ class StationController extends AbstractController
     {
         $user = $userRepository->find($id);
         return $this->render('station/index.html.twig', [
-            'controller_name' => 'StationController',
             'slopes' => $user->getSlopes(),
             'lifts' => $user->getLifts(),
 
