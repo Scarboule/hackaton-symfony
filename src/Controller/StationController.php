@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StationController extends AbstractController
-{
+{/*
     #[Route('/station', name: 'station_index')]
     public function index(UserRepository $userRepository): Response
     {
@@ -18,7 +18,7 @@ class StationController extends AbstractController
             'controller_name' => 'StationController',
             'users' => $userRepository->findAll(),
         ]);
-    }
+    }*/
 
     #[Route('/station/{id}', name: 'show_station')]
     public function show($id, UserRepository $userRepository): Response

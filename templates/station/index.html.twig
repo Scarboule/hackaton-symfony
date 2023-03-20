@@ -19,6 +19,7 @@
 </div>
     <div>
     {% for user in users %}
+        <a href="/product/{{ user.id }}"> {{ user.id }}</a>
         <li>{{ user.id }}</li>
     {% endfor %}
     </div>
