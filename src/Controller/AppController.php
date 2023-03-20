@@ -12,9 +12,12 @@ class AppController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(UserRepository $userRepository): Response
     {
+
+        $users = array_slice($userRepository->findAll(), 1);
+
         return $this->render('app/index.html.twig', [
             'controller_name' => 'AppController',
-            'stations' => $userRepository->findAll(),
+            'stations' => $users,
         ]);
     }
 }
