@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SlopeRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SlopeRepository::class)]
@@ -23,7 +24,13 @@ class Slope
     private ?string $difficulty = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $is_open = null;
+    private ?bool $manual_open = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $manual_close = null;
+
+    #[ORM\Column(type: Types::ARRAY, nullable: true)]
+    private array $schedule = [];
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;

@@ -20,6 +20,12 @@ class Lift
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $manual_open = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $manual_close = null;
+
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $schedule = [];
 
