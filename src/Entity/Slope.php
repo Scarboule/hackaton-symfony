@@ -99,4 +99,17 @@ class Slope
 
         return $this;
     }
+
+    public function setManual_open(?bool $manual_open): self
+    {
+        $this->manual_open = $manual_open;
+
+        return $this;
+    }
+    public function setManual_close(?bool $manual_close): self
+    {
+        $this->manual_close = $manual_close;
+
+        return $this;
+    }
 }
