@@ -20,6 +20,9 @@ class Lift
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
     #[ORM\Column(nullable: true)]
     private ?bool $manual_open = null;
 
@@ -35,6 +38,18 @@ class Lift
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getType(): ?LiftType
@@ -81,6 +96,19 @@ class Lift
     public function setStation(?User $station): self
     {
         $this->station = $station;
+
+        return $this;
+    }
+
+    public function setManual_open(?bool $manual_open): self
+    {
+        $this->manual_open = $manual_open;
+
+        return $this;
+    }
+    public function setManual_close(?bool $manual_close): self
+    {
+        $this->manual_close = $manual_close;
 
         return $this;
     }
