@@ -56,6 +56,12 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
 
         $shopTypes = ['Sport', 'Supermarket', 'Restaurant', 'Coffee', 'Bakery', 'Drugstore', 'Bar', 'Smoke Shop', 'Ski Store'];
 
+        $weatherTypes = ['soleil', 'pluie', 'neige', 'nuageux', 'brumeux'];
+
+        $uvIndex = ['faible', 'modéré', 'fort', "très fort"];
+
+        $snowQuality = ['sèche', 'humide', 'mouillée', 'dure', 'glacée', "poudreuse"];
+
         foreach ($types as $type) {
             $station = new LiftType();
             $station->setName($type);
@@ -73,6 +79,18 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
         foreach ($users as $user) {
 
             $weatherReport = new WeatherReport();
+            $weatherReport->setStation($user);
+            $weatherReport->setTemperature(rand(0, 30) -15);
+            $weatherReport->setTemperatureRange("Maximum : " . rand(10, 20) -10 . " / Minimum : " . rand(0, 20) - 20);
+            $weatherReport->setTemperatureFelt(rand(0, 20) -15);
+            $weatherReport->setType($weatherTypes[rand(0, 4)]);
+            $weatherReport->setWind(rand(0, 100));
+            $weatherReport->setHumidity(rand(0, 100));
+            $weatherReport->setUvIndex($uvIndex[rand(0, 2)]);
+            $weatherReport->setAvalancheRisk($uvIndex[rand(0, 3)]);
+            $weatherReport->setSnowQuality($snowQuality[rand(0, 5)]);
+
+            $manager->persist($weatherReport);
 
 
             for ($i = 0; $i < 3; $i++) {
