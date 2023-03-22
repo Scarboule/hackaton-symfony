@@ -18,9 +18,27 @@
         </ul>
     </div>
 
+
     <div>
+        <a href="/station/{{ id }}/asc">asc</a>
+        <a href="/station/{{ id }}/desc">desc</a>
+        <a href="/station/{{ id }}">default</a>
+
+
         {% for slope in slopes %}
-            <li>{{ slope.id }}</li>
+            <h3>{{ slope.name }}</h3>
+            <p> difficulty :{{ slope.difficulty }}</p>
+
         {% endfor %}
     </div>
+    <div>
+        {% for lift in lifts %}
+
+            <h3> lift :{{ lift.id }}</h3>
+
+
+
+        {% endfor %}
+    </div>
+
 {% endblock %}
