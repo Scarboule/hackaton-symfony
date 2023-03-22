@@ -30,7 +30,7 @@ class DayFormType extends AbstractType
                 'label' => 'Mardi',
             ])
             ->add('tuesday_open_time', Type\TimeType::class, [
-                'label' => 'Mardi',
+                'label' => 'Ouverture',
                 'required' => false,
                 'placeholder' => 'fermée',
                 'empty_data' => 'fermée',
@@ -45,7 +45,7 @@ class DayFormType extends AbstractType
                 'label' => 'Mercredi',
             ])
             ->add('wednesday_open_time', Type\TimeType::class, [
-                'label' => 'Mercredi',
+                'label' => 'Ouverture',
                 'required' => false,
                 'placeholder' => 'fermée',
                 'empty_data' => 'fermée',
@@ -60,7 +60,7 @@ class DayFormType extends AbstractType
                 'label' => 'Jeudi',
             ])
             ->add('thursday_open_time', Type\TimeType::class, [
-                'label' => 'Jeudi',
+                'label' => 'Ouverture',
                 'required' => false,
                 'placeholder' => 'fermée',
                 'empty_data' => 'fermée',
@@ -75,7 +75,7 @@ class DayFormType extends AbstractType
                 'label' => 'Vendredi',
             ])
             ->add('friday_open_time', Type\TimeType::class, [
-                'label' => 'Vendredi',
+                'label' => 'Ouverture',
                 'required' => false,
                 'placeholder' => 'fermée',
                 'empty_data' => 'fermée',
@@ -90,7 +90,7 @@ class DayFormType extends AbstractType
                 'label' => 'Samedi',
             ])
             ->add('saturday_open_time', Type\TimeType::class, [
-                'label' => 'Samedi',
+                'label' => 'Ouverture',
                 'required' => false,
                 'placeholder' => 'fermée',
                 'empty_data' => 'fermée',
@@ -105,7 +105,7 @@ class DayFormType extends AbstractType
                 'label' => 'Dimanche',
             ])
             ->add('sunday_open_time', Type\TimeType::class, [
-                'label' => 'Dimanche',
+                'label' => 'Ouverture',
                 'required' => false,
                 'placeholder' => 'fermée',
                 'empty_data' => 'fermée',
