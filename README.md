@@ -20,14 +20,15 @@ Install dependencies:
 ```composer install```  
 
 Set the local environement :  
+Run your database server.  
 Copy the ```.env``` file and past it at the same place, rename it ```.env.local```.  
 Open it and remove the ```#``` before the method you wish to use to create the database and then put your db infos like this :  
 ```
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
-DATABASE_URL="mysql://YOUR_DB_USER:YOUR_DB_PASSWORD@127.0.0.1:3306/YOUR_DB_NAME?serverVersion=8&charset=utf8mb4"
+DATABASE_URL="mysql://DB_USER:DB_PASSWORD@127.0.0.1:3306/DB_NAME?serverVersion=8&charset=utf8mb4"
 # DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
 ```
-Replace ```YOUR_DB_USER```, ```YOUR_DB_PASSWORD``` and ```YOUR_DB_NAME``` by yours.
+Replace ```DB_USER```, ```DB_PASSWORD``` and ```DB_NAME``` by yours.
 
 Set up the database:  
 ```php bin/console doctrine:database:create```  
