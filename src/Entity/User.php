@@ -253,4 +253,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function __toString()
+    {
+        if ($this->getStationName() === null) {
+            return '';
+        }
+        return $this->getStationName();
+    }
 }

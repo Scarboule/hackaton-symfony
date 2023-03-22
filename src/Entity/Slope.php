@@ -111,4 +111,16 @@ class Slope
 
         return $this;
     }
+
+    public function getSchedule(): array
+    {
+        return $this->schedule;
+    }
+
+    public function setSchedule(?array $schedule): self
+    {
+        $this->schedule = $schedule;
+
+        return $this;
+    }
 }

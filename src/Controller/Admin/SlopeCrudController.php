@@ -3,11 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Slope;
-use App\Repository\SlopeRepository;
-use Doctrine\DBAL\Query\QueryBuilder;
+use App\Form\ScheduleFormType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class SlopeCrudController extends AbstractCrudController
@@ -17,16 +18,25 @@ class SlopeCrudController extends AbstractCrudController
         return Slope::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name')->setLabel('Nom'),
+            AssociationField::new('station'),
+            ChoiceField::new('difficulty')->setChoices([
+                'Green' => 'green',
+                'Blue' => 'blue',
+                'Red' => 'red',
+                'Black' => 'black',
+            ])->setLabel('Difficulté'),
+            BooleanField::new('manual_open')->setLabel('Ouverture manuelle'),
+            BooleanField::new('manual_close')->setLabel('Fermeture manuelle'),
+            TextField::new('message'),
+            CollectionField::new('schedule')
+                ->setLabel('Horaires')
+                ->setEntryType(ScheduleFormType::class)
         ];
     }
-    */
 
     public function createEntity(string $entityFqcn): Slope
     {

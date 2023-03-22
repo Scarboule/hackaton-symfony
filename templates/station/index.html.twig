@@ -10,10 +10,36 @@
 
     <div class="example-wrapper">
 
-        <div>
-            {% for slope in slopes %}
-                <li>{{ slope.id }}</li>
-            {% endfor %}
-        </div>
+
+        This friendly message is coming from:
+        <ul>
+            <li>Your controller at <code><a href="{{ 'C:/laragon/www/Projet Symfony/hackaton-symfony/src/Controller/StationController.php'|file_link(0) }}">src/Controller/StationController.php</a></code></li>
+            <li>Your template at <code><a href="{{ 'C:/laragon/www/Projet Symfony/hackaton-symfony/templates/station/index.html.twig'|file_link(0) }}">templates/station/index.html.twig</a></code></li>
+        </ul>
     </div>
+
+
+    <div>
+        <a href="/station/{{ id }}/asc">asc</a>
+        <a href="/station/{{ id }}/desc">desc</a>
+        <a href="/station/{{ id }}">default</a>
+
+
+        {% for slope in slopes %}
+            <h3>{{ slope.name }}</h3>
+            <p> difficulty :{{ slope.difficulty }}</p>
+
+        {% endfor %}
+        
+    </div>
+    <div>
+        {% for lift in lifts %}
+
+            <h3> lift :{{ lift.id }}</h3>
+
+
+
+        {% endfor %}
+    </div>
+
 {% endblock %}
