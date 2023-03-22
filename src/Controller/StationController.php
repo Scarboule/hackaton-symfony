@@ -29,13 +29,13 @@ class StationController extends AbstractController
 
 
         return $this->render('station/index.html.twig', [
-            'controller_name' => 'StationController',
             'slopes' => $user->getSlopes(),
             'lifts' => $lifts,
             'id' => $id
 
         ]);
     }
+
     #[Route('/station/{id}/{sort}', name: 'category_show_sorted')]
     public function showSorted($id, $sort, UserRepository $userRepository): Response
     {
@@ -59,10 +59,12 @@ class StationController extends AbstractController
             });
         }
         return $this->render('station/index.html.twig', [
-            'controller_name' => 'StationController',
             'slopes' => $slopes,
             'lifts' => $lifts,
             'id' => $id
         ]);
     }
+
+
 }
+

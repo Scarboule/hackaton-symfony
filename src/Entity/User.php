@@ -48,10 +48,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Lift::class)]
     private Collection $lifts;
 
+    #[ORM\OneToMany(mappedBy: 'station', targetEntity: Shop::class)]
+    private Collection $shops;
+
     public function __construct()
     {
         $this->slopes = new ArrayCollection();
         $this->lifts = new ArrayCollection();
+        $this->shops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -214,6 +218,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($lift->getStation() === $this) {
                 $lift->setStation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Shop>
+     */
+    public function getShops(): Collection
+    {
+        return $this->shops;
+    }
+
+    public function addShop(Shop $shop): self
+    {
+        if (!$this->shops->contains($shop)) {
+            $this->shops->add($shop);
+            $shop->setStation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeShop(Shop $shop): self
+    {
+        if ($this->shops->removeElement($shop)) {
+            // set the owning side to null (unless already changed)
+            if ($shop->getStation() === $this) {
+                $shop->setStation(null);
             }
         }
 

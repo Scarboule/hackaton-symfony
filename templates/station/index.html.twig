@@ -9,7 +9,7 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
+
 
         This friendly message is coming from:
         <ul>
@@ -30,6 +30,13 @@
             <p> difficulty :{{ slope.difficulty }}</p>
 
         {% endfor %}
+
+        <div>
+            {% for slope in slopes %}
+                <li>{{ slope.id }}</li>
+            {% endfor %}
+        </div>
+
     </div>
     <div>
         {% for lift in lifts %}
