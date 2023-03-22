@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Lift;
 use App\Entity\LiftType;
+use App\Entity\Shop;
 use App\Entity\Slope;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -27,7 +28,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($superAdmin);
 
-        foreach (['Les Saisies', 'Crest-Volant Cohennoz', 'Notre-Dame-de-Bellecombe', 'Praz-sur-Arly', 'Flumet'] as $StationName){
+        foreach (['LesSaisies', 'Crest-VolantCohennoz', 'Notre-Dame-de-Bellecombe', 'Praz-sur-Arly', 'Flumet'] as $StationName){
             $user = new User();
             $user->setStationName($StationName);
             $user->setEmail('station' . $StationName . '@example.com');
@@ -52,6 +53,8 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
 
         $types = ['télésiège', 'téléski', 'télécabine'];
 
+        $shopTypes = ['Sport', 'Supermarket', 'Restaurant', 'Coffee', 'Bakery', 'Drugstore', 'Bar', 'Smoke Shop', 'Ski Store'];
+
         foreach ($types as $type) {
             $station = new LiftType();
             $station->setName($type);
@@ -72,8 +75,8 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
                 $lift->setStation($user);
                 $lift->setName('Lift ' . $i);
                 $lift->setType($types[rand(0, 2)]);
-                $lift->setManual_open(0);
-                $lift->setManual_close(0);
+                $lift->setManualOpen(0);
+                $lift->setManualClose(0);
 
                 $manager->persist($lift);
 
@@ -81,12 +84,23 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
                 $slope->setStation($user);
                 $slope->setName('Slope ' . $i);
                 $slope->setDifficulty(['black', 'red', 'blue', 'green'][rand(0, 3)]);
-                $slope->setManual_open(0);
-                $slope->setManual_close(0);
+                $slope->setManualOpen(0);
+                $slope->setManualClose(0);
 
                 $manager->persist($slope);
             }
+
+            for ($i = 0; $i < 10; $i++) {
+                $shop = new Shop();
+                $shop->setStation($user);
+                $shop->setName('Shop' . $i);
+                $shop->setType($shopTypes[rand(0, 8)]);
+
+                $manager->persist($shop);
+            }
         }
+
+
 
         $manager->flush();
     }

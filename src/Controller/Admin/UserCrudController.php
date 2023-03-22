@@ -5,6 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -13,16 +17,41 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        if (in_array('ROLE_SUPER_ADMIN', $this->getUser()->getRoles())) {
+            return [
+                TextField::new('station_name'),
+                TextField::new('email'),
+                ArrayField::new('roles'),
+                ImageField::new('logo_url')
+                    ->setUploadDir('public/uploads/images')
+                    ->setBasePath('uploads/images')
+                    ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
+                    ->setFormTypeOptions([
+                        'attr' => [
+                            'accept' => 'image/*'
+                        ]
+                    ]),
+                TextEditorField::new('presentation'),
+            ];
+        }else{
+            return [
+                TextField::new('station_name'),
+                TextField::new('email'),
+                ImageField::new('logo_url')
+                    ->setUploadDir('public/uploads/images')
+                    ->setBasePath('uploads/images')
+                    ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
+                    ->setFormTypeOptions([
+                        'attr' => [
+                            'accept' => 'image/*'
+                        ]
+                    ]),
+                TextEditorField::new('presentation'),
+            ];
+        }
     }
-    */
 
     public function createIndexQueryBuilder($entityClass, $sortDirection, $sortField = null, $dqlFilter = null): \Doctrine\ORM\QueryBuilder
     {
