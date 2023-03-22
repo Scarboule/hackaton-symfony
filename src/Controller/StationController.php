@@ -42,6 +42,7 @@ class StationController extends AbstractController
         $station = $userRepository->find($id);
         $slopes = $station->getSlopes()->toArray();
         $lifts = $station->getLifts();
+        $validDifficulties = ['green', 'blue', 'red', 'black'];
 
         if ($sort == 'asc') {
             usort($slopes, function ($a, $b) {
@@ -58,6 +59,14 @@ class StationController extends AbstractController
                 return  $bDiffIndex - $aDiffIndex;
             });
         }
+
+
+        elseif (in_array($sort, ['green', 'blue', 'red', 'black'])) {
+            $slopes = array_filter($slopes, function ($slope) use ($sort) {
+                return $slope->getDifficulty() == $sort;
+            });
+        }
+
         return $this->render('station/index.html.twig', [
             'slopes' => $slopes,
             'lifts' => $lifts,
