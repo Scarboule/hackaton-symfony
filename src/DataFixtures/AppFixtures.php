@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($superAdmin);
 
-        foreach (['Les Saisies', 'Crest-Volant Cohennoz', 'Notre-Dame-de-Bellecombe', 'Praz-sur-Arly', 'Flumet'] as $StationName){
+        foreach (['LesSaisies', 'Crest-VolantCohennoz', 'Notre-Dame-de-Bellecombe', 'Praz-sur-Arly', 'Flumet'] as $StationName){
             $user = new User();
             $user->setStationName($StationName);
             $user->setEmail('station' . $StationName . '@example.com');
