@@ -19,21 +19,38 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        return [
-            TextField::new('station_name'),
-            TextField::new('email'),
-            ArrayField::new('roles'),
-            ImageField::new('logo_url')
-                ->setUploadDir('public/uploads/images')
-                ->setBasePath('uploads/images')
-                ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
-                ->setFormTypeOptions([
-                    'attr' => [
-                        'accept' => 'image/*'
-                    ]
-                ]),
-            TextEditorField::new('presentation'),
-        ];
+        if (in_array('ROLE_SUPER_ADMIN', $this->getUser()->getRoles())) {
+            return [
+                TextField::new('station_name'),
+                TextField::new('email'),
+                ArrayField::new('roles'),
+                ImageField::new('logo_url')
+                    ->setUploadDir('public/uploads/images')
+                    ->setBasePath('uploads/images')
+                    ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
+                    ->setFormTypeOptions([
+                        'attr' => [
+                            'accept' => 'image/*'
+                        ]
+                    ]),
+                TextEditorField::new('presentation'),
+            ];
+        }else{
+            return [
+                TextField::new('station_name'),
+                TextField::new('email'),
+                ImageField::new('logo_url')
+                    ->setUploadDir('public/uploads/images')
+                    ->setBasePath('uploads/images')
+                    ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
+                    ->setFormTypeOptions([
+                        'attr' => [
+                            'accept' => 'image/*'
+                        ]
+                    ]),
+                TextEditorField::new('presentation'),
+            ];
+        }
     }
 
     public function createIndexQueryBuilder($entityClass, $sortDirection, $sortField = null, $dqlFilter = null): \Doctrine\ORM\QueryBuilder
