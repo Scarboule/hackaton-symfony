@@ -7,6 +7,7 @@ use App\Entity\LiftType;
 use App\Entity\Shop;
 use App\Entity\Slope;
 use App\Entity\User;
+use App\Entity\WeatherReport;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -70,6 +71,10 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
         $types = $typesRepository->findAll();
 
         foreach ($users as $user) {
+
+            $weatherReport = new WeatherReport();
+
+
             for ($i = 0; $i < 3; $i++) {
                 $lift = new Lift();
                 $lift->setStation($user);
