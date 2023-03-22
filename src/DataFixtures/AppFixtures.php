@@ -72,8 +72,8 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
                 $lift->setStation($user);
                 $lift->setName('Lift ' . $i);
                 $lift->setType($types[rand(0, 2)]);
-                $lift->setManual_open(0);
-                $lift->setManual_close(0);
+                $lift->setManualOpen(0);
+                $lift->setManualClose(0);
 
                 $manager->persist($lift);
 
@@ -81,8 +81,8 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
                 $slope->setStation($user);
                 $slope->setName('Slope ' . $i);
                 $slope->setDifficulty(['black', 'red', 'blue', 'green'][rand(0, 3)]);
-                $slope->setManual_open(0);
-                $slope->setManual_close(0);
+                $slope->setManualOpen(0);
+                $slope->setManualClose(0);
 
                 $manager->persist($slope);
             }
