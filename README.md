@@ -21,7 +21,7 @@ Install dependencies:
 
 Set the local environement :  
 Copy the ```.env``` file and past it at the same place, rename it ```.env.local```.  
-Then remove the ```#``` before the method you wish to use to create the database and put your db infos like this :  
+Open it and remove the ```#``` before the method you wish to use to create the database and then put your db infos like this :  
 ```
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
 DATABASE_URL="mysql://YOUR_DB_USER:YOUR_DB_PASSWORD@127.0.0.1:3306/YOUR_DB_NAME?serverVersion=8&charset=utf8mb4"
@@ -29,7 +29,7 @@ DATABASE_URL="mysql://YOUR_DB_USER:YOUR_DB_PASSWORD@127.0.0.1:3306/YOUR_DB_NAME?
 ```
 Replace ```YOUR_DB_USER```, ```YOUR_DB_PASSWORD``` and ```YOUR_DB_NAME``` by yours.
 
-Set up the database:
+Set up the database:  
 ```php bin/console doctrine:database:create```  
 and  
 ```php bin/console doctrine:migrations:migrate```  
