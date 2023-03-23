@@ -3,32 +3,42 @@
 
 {% block body %}
     {% include 'partial/header.html.twig' %}
-
-    <div>
-        <a href="/station/{{ id }}/asc">asc</a>
-        <a href="/station/{{ id }}/desc">desc</a>
-        <a href="/station/{{ id }}">default</a>
-        <a href="/station/{{ id }}/red">red</a>
-        <a href="/station/{{ id }}/blue">blue</a>
-        <a href="/station/{{ id }}/green">green</a>
-        <a href="/station/{{ id }}/black">black</a>
-
-
-        {% for slope in slopes %}
-            <h3>{{ slope.name }}</h3>
-            <p> difficulty :{{ slope.difficulty }}</p>
-
-        {% endfor %}
-
+    <div class="w-11/12 mx-auto mt-8">
+        <h1 class="text-xl text-[#4D4F51] font-bold tracking-wide">{{ station.StationName }} Station information :</h1>
+        <div class="mt-8">
+            <div class="grid grid-flow-row grid-cols-4 gap-2 lf:flex lg:grid-cols-10 lg:w-[70%] justify-between">
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/asc">asc</a>
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/desc">desc</a>
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}">default</a>
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/red">red</a>
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/blue">blue</a>
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/green">green</a>
+                <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/black">black</a>
+            </div>
+            <div class="flex mt-6 snap-x snap-mandatory overflow-y-hidden">
+                <div class=" snap-start shrink-0 flex flex-row">
+                    {% for slope in slopes %}
+                        <div class="mr-8 flex flex-col rounded-lg w-[50vw] lg:w-[15vw] lg:h-[40vh] h-[40vh] relative items-center justify-end ">
+                            <div class="z-[2] flex flex-col backdrop-blur rounded-lg mb-4 w-10/12 text-[#4D4F51] p-2">
+                                <h3 class="uppercase text-[#3979F6] font-bold">{{ slope.name }}</h3>
+                                <p class="capitalize"> difficulty : {{ slope.difficulty }}</p>
+                            </div>
+                            <img class="object-cover rounded-lg absolute h-full z-[1]" src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg" alt="montagne">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col lg:w-[25%] w-9/12 mt-8">
+            <h2 class="uppercase">{{ station.StationName }} lifts </h2>
+            <div class="flex flex-row w-full justify-between mt-4">
+                {% for lift in lifts %}
+                    <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded">
+                        <h3 class="uppercase"> lift n°{{ lift.id }}</h3>
+                        <h3 class="capitalize">{{ lift.type }}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div>
-        {% for lift in lifts %}
-
-            <h3> lift :{{ lift.id }}</h3>
-
-
-
-        {% endfor %}
-    </div>
-
 {% endblock %}

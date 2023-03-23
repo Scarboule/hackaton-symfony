@@ -21,18 +21,13 @@ class StationController extends AbstractController
     }*/
 
     #[Route('/station/{id}', name: 'station_index')]
-    public function show($id, UserRepository $userRepository, LiftRepository $liftRepository): Response
+    public function show($id, UserRepository $userRepository): Response
     {
-        $user = $userRepository->find($id);
-        $lifts = $user->getLifts();
-
-
-
+        $station = $userRepository->find($id);
         return $this->render('station/index.html.twig', [
-            'slopes' => $user->getSlopes(),
-            'lifts' => $lifts,
-            'id' => $id
-
+            'station' => $station,
+            'slopes' => $station->getSlopes(),
+            'lifts' => $station->getLifts(),
         ]);
     }
 
@@ -41,36 +36,26 @@ class StationController extends AbstractController
     {
         $station = $userRepository->find($id);
         $slopes = $station->getSlopes()->toArray();
-        $lifts = $station->getLifts();
-        $validDifficulties = ['green', 'blue', 'red', 'black'];
 
-        if ($sort == 'asc') {
+        if ($sort === 'asc' or $sort === 'desc') {
             usort($slopes, function ($a, $b) {
                 $difficulties = ['green', 'blue', 'red', 'black'];
                 $aDiffIndex = array_search($a->getDifficulty(), $difficulties);
                 $bDiffIndex = array_search($b->getDifficulty(), $difficulties);
                 return $aDiffIndex - $bDiffIndex;
             });
-        }elseif ($sort == 'desc'){
-            usort($slopes, function ($a, $b) {
-                $difficulties = ['green', 'blue', 'red', 'black'];
-                $aDiffIndex = array_search($a->getDifficulty(), $difficulties);
-                $bDiffIndex = array_search($b->getDifficulty(), $difficulties);
-                return  $bDiffIndex - $aDiffIndex;
-            });
-        }
 
-
-        elseif (in_array($sort, ['green', 'blue', 'red', 'black'])) {
+            if ($sort == 'desc') $slopes = array_reverse($slopes);
+        } else {
             $slopes = array_filter($slopes, function ($slope) use ($sort) {
-                return $slope->getDifficulty() == $sort;
+                return $slope->getDifficulty() === $sort;
             });
         }
 
         return $this->render('station/index.html.twig', [
+            'station' => $station,
             'slopes' => $slopes,
-            'lifts' => $lifts,
-            'id' => $id
+            'lifts' => $station->getLifts(),
         ]);
     }
 
