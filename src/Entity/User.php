@@ -54,11 +54,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Shop::class)]
     private Collection $shops;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: FavoriteStation::class)]
+    private Collection $favoriteStations;
+
     public function __construct()
     {
         $this->slopes = new ArrayCollection();
         $this->lifts = new ArrayCollection();
         $this->shops = new ArrayCollection();
+        $this->favoriteStations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -293,5 +297,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             return '';
         }
         return $this->getStationName();
+    }
+
+    /**
+     * @return Collection<int, FavoriteStation>
+     */
+    public function getFavoriteStations(): Collection
+    {
+        return $this->favoriteStations;
+    }
+
+    public function addFavoriteStation(FavoriteStation $favoriteStation): self
+    {
+        if (!$this->favoriteStations->contains($favoriteStation)) {
+            $this->favoriteStations->add($favoriteStation);
+            $favoriteStation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavoriteStation(FavoriteStation $favoriteStation): self
+    {
+        if ($this->favoriteStations->removeElement($favoriteStation)) {
+            // set the owning side to null (unless already changed)
+            if ($favoriteStation->getUser() === $this) {
+                $favoriteStation->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }

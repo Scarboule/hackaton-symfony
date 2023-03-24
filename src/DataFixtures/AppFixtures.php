@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\FavoriteStation;
 use App\Entity\Lift;
 use App\Entity\LiftType;
 use App\Entity\LostAndFoundObject;
@@ -128,6 +129,18 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
 
         $slopeRepository = $manager->getRepository(Slope::class);
         $slopes = $slopeRepository->findAll();
+
+        $user = new User();
+        $user->setEmail('utilisateur@example.com');
+        $user->setPassword($this->hasher->hashPassword($user, 'password'));
+
+        $manager->persist($user);
+
+        $favoriteStation = new FavoriteStation();
+        $favoriteStation->setUser($user);
+        $favoriteStation->setStation($users[rand(0, count($users) - 2)]);
+
+        $manager->persist($favoriteStation);
 
         $object = new LostAndFoundObject();
         $object->setDescription('Bonnet rouge');
