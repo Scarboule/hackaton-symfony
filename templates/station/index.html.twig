@@ -42,11 +42,26 @@
         </div>
 
         <div class="flex flex-col w-full justify-between mt-4 gap-y-10">
+            <h2>Shops List :</h2>
             {% for shop in shops %}
                 <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded">
-                    <h3>Shop's name : {{ shop.name }}</h3>
-                    <h3>Shop's type : {{ shop.type }}</h3>
+                    <h3>Shop name : {{ shop.name }}</h3>
+                    <h3>Shop type : {{ shop.type }}</h3>
                 </div>
+            {% endfor %}
+        </div>
+
+        <div>
+            {% for weatherReport in weatherReports %}
+            <p>Temperature : {{ weatherReport.temperature }}°C</p>
+                <p>{{ weatherReport.temperatureRange }}</p>
+                <p>Felt : {{ weatherReport.temperatureFelt }}°C</p>
+                <p>Weather : {{ weatherReport.type }}</p>
+                <p>Wind : {{ weatherReport.wind }}km/h</p>
+                <p>Humidity : {{ weatherReport.humidity }}%</p>
+                <p>UV Index : {{ weatherReport.uvIndex }}</p>
+                <p>Avalanche risk : {{ weatherReport.avalancheRisk }}</p>
+                <p>Snow quality : {{ weatherReport.snowQuality }}</p>
             {% endfor %}
         </div>
     </div>

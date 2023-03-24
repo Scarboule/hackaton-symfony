@@ -29,6 +29,7 @@ class StationController extends AbstractController
             'slopes' => $station->getSlopes(),
             'lifts' => $station->getLifts(),
             'shops' => $station->getShops(),
+            'weatherReports' => $station->getWeatherReports(),
         ]);
     }
 
