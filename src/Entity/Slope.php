@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SlopeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +36,14 @@ class Slope
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $message = null;
+
+    #[ORM\OneToMany(mappedBy: 'slope', targetEntity: LostAndFoundObject::class)]
+    private Collection $lostAndFoundObjects;
+
+    public function __construct()
+    {
+        $this->lostAndFoundObjects = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,5 +132,43 @@ class Slope
         $this->schedule = $schedule;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, LostAndFoundObject>
+     */
+    public function getLostAndFoundObjects(): Collection
+    {
+        return $this->lostAndFoundObjects;
+    }
+
+    public function addLostAndFoundObject(LostAndFoundObject $lostAndFoundObject): self
+    {
+        if (!$this->lostAndFoundObjects->contains($lostAndFoundObject)) {
+            $this->lostAndFoundObjects->add($lostAndFoundObject);
+            $lostAndFoundObject->setSlope($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLostAndFoundObject(LostAndFoundObject $lostAndFoundObject): self
+    {
+        if ($this->lostAndFoundObjects->removeElement($lostAndFoundObject)) {
+            // set the owning side to null (unless already changed)
+            if ($lostAndFoundObject->getSlope() === $this) {
+                $lostAndFoundObject->setSlope(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        if ($this->getName() === null) {
+            return '';
+        }
+        return $this->getStation() . ', ' . $this->getName();
     }
 }
