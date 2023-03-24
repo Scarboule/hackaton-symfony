@@ -1,19 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AppController!{% endblock %}
 
 {% block body %}
+    {% include 'partial/header.html.twig' %}
 
-<div class="example-wrapper">
-    <h1>Les stations de ski du domaine "Espace Diamant" :</h1>
 
-    <ul class="station">
+<div class="w-11/12 mx-auto mt-8">
+    <h2 class="font-bold mb-3">The Stations of Espace Diamant :</h2>
+    <div class="flex">
+
         {% for station in stations %}
             <div>
-                <a href="{{ path('station_index', {'id': station.id}) }}"><li>{{ station.StationName }}</li></a>
+                <div class="mr-8 flex flex-col rounded-lg w-[50vw] lg:w-[15vw] lg:h-[40vh] h-[40vh] relative items-center justify-end ">
+                    <div class="z-[2] flex flex-col backdrop-blur rounded-lg mb-4 w-10/12 text-[#4D4F51] p-2">
+
+                        <a href="{{ path('station_index', {'id': station.id}) }}" class="capitalize">See Station</a>
+                    </div>
+                    <img class="object-cover rounded-lg absolute h-full z-[1]" src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg" alt="montagne">
+
+                </div>
+                <div class="flex lg:w-[15vw] w-[50vw] justify-between items-center">
+                    <h3>{{ station.StationName }}</h3>
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                </div>
             </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 
 {% endblock %}
