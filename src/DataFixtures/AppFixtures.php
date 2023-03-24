@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Lift;
 use App\Entity\LiftType;
+use App\Entity\LostAndFoundObject;
 use App\Entity\Shop;
 use App\Entity\Slope;
 use App\Entity\User;
@@ -123,7 +124,17 @@ Sur les pistes, le ski est généreux, accessible et sportif. La qualité de vie
             }
         }
 
+        $manager->flush();
 
+        $slopeRepository = $manager->getRepository(Slope::class);
+        $slopes = $slopeRepository->findAll();
+
+        $object = new LostAndFoundObject();
+        $object->setDescription('Bonnet rouge');
+        $object->setSlope($slopes[rand(0, count($slopes) - 1)]);
+        $object->setFoundDate(new \DateTime('2021-01-01 12:00:00'));
+
+        $manager->persist($object);
 
         $manager->flush();
     }
