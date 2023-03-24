@@ -20,9 +20,14 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     use TargetPathTrait;
 
     public const LOGIN_ROUTE = 'app_login';
+    /**
+     * @var Security
+     */
+    private $security;
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator, Security $security)
     {
+        $this->security = $security;
     }
 
     public function authenticate(Request $request): Passport
@@ -46,7 +51,11 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin'));
+        if (in_array('ROLE_SUPER_ADMIN', $this->security->getUser()->getRoles()) or in_array('ROLE_ADMIN', $this->security->getUser()->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
+
+        return new RedirectResponse($this->urlGenerator->generate('app_index'));
         throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
