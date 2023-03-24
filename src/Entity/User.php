@@ -48,6 +48,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Lift::class)]
     private Collection $lifts;
 
+    #[ORM\OneToMany(mappedBy: 'station', targetEntity: WeatherReport::class)]
+    private Collection $weatherReports;
+
     #[ORM\OneToMany(mappedBy: 'station', targetEntity: Shop::class)]
     private Collection $shops;
 
@@ -218,6 +221,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($lift->getStation() === $this) {
                 $lift->setStation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, WeatherReport>
+     */
+    public function getWeatherReports(): Collection
+    {
+        return $this->weatherReports;
+    }
+
+    public function addWeatherReport(WeatherReport $weatherReport): self
+    {
+        if (!$this->weatherReports->contains($weatherReport)) {
+            $this->weatherReports->add($weatherReport);
+            $weatherReport->setStation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWeatherReport(WeatherReport $weatherReport): self
+    {
+        if ($this->weatherReports->removeElement($weatherReport)) {
+            // set the owning side to null (unless already changed)
+            if ($weatherReport->getStation() === $this) {
+                $weatherReport->setStation(null);
             }
         }
 
