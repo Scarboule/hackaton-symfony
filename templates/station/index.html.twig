@@ -5,16 +5,24 @@
     {% include 'partial/header.html.twig' %}
     <div class="w-11/12 mx-auto mt-8 flex lg:flex-row flex-column justify-content-between mb-8">
         <div class="lg:h-full lg:w-9/12 w-full pr-5">
-            <h1 class="text-xl text-[#4D4F51] font-bold tracking-wide">{{ station.StationName }} Station information :</h1>
+            <h1 class="text-xl text-[#4D4F51] font-bold tracking-wide">{{ station.StationName }} Station information
+                :</h1>
             <div class="mt-8">
                 <div class="grid grid-flow-row grid-cols-4 gap-2 lf:flex lg:grid-cols-10 lg:w-full justify-between">
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/asc">asc</a>
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/desc">desc</a>
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}">default</a>
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/red">red</a>
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/blue">blue</a>
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/green">green</a>
-                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase" href="/station/{{ station.id }}/black">black</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}/asc">asc</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}/desc">desc</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}">default</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}/red">red</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}/blue">blue</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}/green">green</a>
+                    <a class="bg-white text-md py-1 px-3 flex items-center text-[#939393] rounded hover:bg-[#3979F6] hover:text-white uppercase"
+                       href="/station/{{ station.id }}/black">black</a>
                 </div>
                 <div class="flex mt-6 snap-x snap-mandatory overflow-y-hidden">
                     <div class=" snap-start shrink-0 flex flex-row">
@@ -24,7 +32,9 @@
                                     <h3 class="uppercase text-[#3979F6] font-bold">{{ slope.name }}</h3>
                                     <p class="capitalize"> difficulty : {{ slope.difficulty }}</p>
                                 </div>
-                                <img class="object-cover rounded-lg absolute h-full z-[1]" src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg" alt="montagne">
+                                <img class="object-cover rounded-lg absolute h-full z-[1]"
+                                     src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg"
+                                     alt="montagne">
                             </div>
                         {% endfor %}
                     </div>
@@ -43,14 +53,30 @@
             </div>
 
             <div class="flex flex-col w-full justify-between mt-4">
-                <h2  class="uppercase text-[#1E1E1E]">Shops List :</h2>
+                <h2 class="uppercase text-[#1E1E1E]">Shops List :</h2>
                 <div class="grid grid-flow-row lg:grid-cols-6 grid-cols-3 w-full gap-4 mt-4">
                     {% for shop in shops %}
-                        <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded hover:cursor-pointer">
+                        <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded cursor-pointer">
                             <h3 class="text-[#4D4F51]">{{ shop.name }}</h3>
                             <h3>{{ shop.type }}</h3>
                         </div>
                     {% endfor %}
+                </div>
+            </div>
+
+            <div class="flex flex-col w-full justify-between mt-4">
+                <h2 class="uppercase text-[#1E1E1E]">Lost and found items :</h2>
+                <div class="grid grid-flow-row lg:grid-cols-6 grid-cols-3 w-full gap-4 mt-4">
+                    <div>
+                        {% for slope in slopes %}
+                            {% for object in slope.lostAndFoundObjects %}
+                                <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded">
+                                    <h3 class="text-[#4D4F51]">{{ object.description }}</h3>
+                                    <h3>Found on slope: {{ slope.name }}</h3>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +86,7 @@
                     <p>Temperature : {{ weatherReport.temperature }}°C</p>
                     <p>{{ weatherReport.temperatureRange }}</p>
                     <p>Felt : {{ weatherReport.temperatureFelt }}°C</p>
-                    <p id="weather" >Weather : {{ weatherReport.type }}</p>
+                    <p id="weather">Weather : {{ weatherReport.type }}</p>
                     <p>Wind : {{ weatherReport.wind }}km/h</p>
                     <p>Humidity : {{ weatherReport.humidity }}%</p>
                     <p>UV Index : {{ weatherReport.uvIndex }}</p>
@@ -79,13 +105,13 @@
         if (weather === 'Weather : pluie') {
             weatherContainer.style.backgroundImage = "url('/img/pluie.png')";
         } else if (weather === 'Weather : nuageux') {
-          weatherContainer.style.backgroundImage = "url('/img/nuage.png')";
+            weatherContainer.style.backgroundImage = "url('/img/nuage.png')";
         } else if (weather === 'Weather : soleil') {
-          weatherContainer.style.backgroundImage = "url('/img/soleil.png')";
-        }else if (weather === 'Weather : neige') {
-          weatherContainer.style.backgroundImage = "url('/img/neige.jpeg')";
-        }else if (weather === 'Weather : brumeux') {
-          weatherContainer.style.backgroundImage = "url('/img/brumeux.png')";
+            weatherContainer.style.backgroundImage = "url('/img/soleil.png')";
+        } else if (weather === 'Weather : neige') {
+            weatherContainer.style.backgroundImage = "url('/img/neige.jpeg')";
+        } else if (weather === 'Weather : brumeux') {
+            weatherContainer.style.backgroundImage = "url('/img/brumeux.png')";
         }
     </script>
 {% endblock %}
