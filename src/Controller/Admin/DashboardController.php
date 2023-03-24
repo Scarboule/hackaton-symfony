@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Lift;
 use App\Entity\LiftType;
+use App\Entity\LostAndFoundObject;
 use App\Entity\Slope;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -19,7 +20,9 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
          $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-         return $this->redirect($adminUrlGenerator->setController(SlopeCrudController::class)->generateUrl());
+         return $this->redirect($adminUrlGenerator
+             ->setController(UserCrudController::class)
+             ->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -33,6 +36,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Account', 'fa fa-user', User::class);
         yield MenuItem::linkToCrud('Pistes', 'fa fa-person-skiing', Slope::class);
         yield MenuItem::linkToCrud('Remontée mécanique', 'fa fa-elevator', Lift::class);
+        yield MenuItem::linkToCrud('Objets perdus', 'fa fa-magnifying-glass', LostAndFoundObject::class);
         if (in_array('ROLE_SUPER_ADMIN', $this->getUser()->getRoles())) {
             yield MenuItem::linkToCrud('Types de pistes', 'fa fa-shapes', LiftType::class);
         }
