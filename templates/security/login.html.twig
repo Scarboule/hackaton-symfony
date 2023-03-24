@@ -53,7 +53,7 @@
             </div>
         </form>
         <div class="w-1/2 lg:flex hidden flex-col h-full">
-            <img class=" h-full w-full object-cover" src="/img/montagne.jpeg" alt="montagne">
+            <img class=" h-full w-full object-cover" src="" id="season" alt="montagne">
         </div>
     </div>
 
@@ -72,13 +72,24 @@
             inputField.type = "password";
         }
     });
-        inputField.addEventListener("input", function() {
-            if (inputField.value === "") {
-                myButton.style.backgroundColor = "rgba(57, 121, 246,0.5)";
-            } else {
-                myButton.style.backgroundColor = "#3979F6";
-            }
-        });
+    inputField.addEventListener("input", function() {
+        if (inputField.value === "") {
+            myButton.style.backgroundColor = "rgba(57, 121, 246,0.5)";
+        } else {
+            myButton.style.backgroundColor = "#3979F6";
+        }
+    });
 
-    </script>
+    const seasonImage = document.getElementById("season");
+    const date = new Date();
+    const month = date.getMonth() + 1;
+
+    if ( month <= 6) {
+      seasonImage.src = "/img/montagne.jpeg";
+    } else{
+      seasonImage.src = "/img/montagne-ete.jpeg";
+    }
+
+
+</script>
 {% endblock %}
