@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ColorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class SlopeCrudController extends AbstractCrudController
@@ -24,10 +25,10 @@ class SlopeCrudController extends AbstractCrudController
             TextField::new('name')->setLabel('Nom'),
             AssociationField::new('station'),
             ChoiceField::new('difficulty')->setChoices([
-                'Green' => 'green',
-                'Blue' => 'blue',
-                'Red' => 'red',
-                'Black' => 'black',
+                'Verte' => 'green',
+                'Bleue' => 'blue',
+                'Rouge' => 'red',
+                'Noire' => 'black',
             ])->setLabel('Difficulté'),
             BooleanField::new('manual_open')->setLabel('Ouverture manuelle'),
             BooleanField::new('manual_close')->setLabel('Fermeture manuelle'),

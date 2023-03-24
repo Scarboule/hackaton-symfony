@@ -29,10 +29,10 @@ class AppFixtures extends Fixture
 
         $manager->persist($superAdmin);
 
-        foreach (['LesSaisies', 'Crest-VolantCohennoz', 'Notre-Dame-de-Bellecombe', 'Praz-sur-Arly', 'Flumet'] as $StationName){
+        foreach (['Les Saisies', 'Crest-Volant Cohennoz', 'Notre-Dame-de-Bellecombe', 'Praz-sur-Arly', 'Flumet'] as $StationName){
             $user = new User();
             $user->setStationName($StationName);
-            $user->setEmail('station' . $StationName . '@example.com');
+            $user->setEmail(implode('-', explode(' ', strtolower($StationName))) . '@example.com');
             $user->setPassword($this->hasher->hashPassword($user, 'password'));
             $user->setPresentation($StationName . " : Posé à une altitude idéale entre le massif du Beaufortain et le Val d’Arly, face au Mont-Blanc, l’Espace Diamant est un terrain de jeu exceptionnel.
 
