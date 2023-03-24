@@ -40,5 +40,14 @@
                 {% endfor %}
             </div>
         </div>
+
+        <div class="flex flex-col w-full justify-between mt-4 gap-y-10">
+            {% for shop in shops %}
+                <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded">
+                    <h3>Shop's name : {{ shop.name }}</h3>
+                    <h3>Shop's type : {{ shop.type }}</h3>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
