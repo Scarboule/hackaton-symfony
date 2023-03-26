@@ -31,6 +31,15 @@
                                 <div class="z-[2] flex flex-col backdrop-blur rounded-lg mb-4 w-10/12 text-[#4D4F51] p-2">
                                     <h3 class="uppercase text-[#3979F6] font-bold">{{ slope.name }}</h3>
                                     <p class="capitalize"> difficulty : {{ slope.difficulty }}</p>
+{#                                    {% if slope.isManualOpen %}#}
+{#                                        <h3>Exceptionally open</h3>#}
+{#                                    {% endif %}#}
+{#                                    {% if slope.isManualClose %}#}
+{#                                        <h3>Exceptionally closed</h3>#}
+{#                                    {% endif %}#}
+{#                                    {% if slope.message != '' %}#}
+{#                                        <p>{{ slope.message }}</p>#}
+{#                                    {% endif %}#}
 {#                                    {% if slope.schedule %}#}
 {#                                        <span class="text-bold">Schedule:</span>#}
 {#                                        {% for s in slope.schedule %}#}
