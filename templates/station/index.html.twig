@@ -31,6 +31,30 @@
                                 <div class="z-[2] flex flex-col backdrop-blur rounded-lg mb-4 w-10/12 text-[#4D4F51] p-2">
                                     <h3 class="uppercase text-[#3979F6] font-bold">{{ slope.name }}</h3>
                                     <p class="capitalize"> difficulty : {{ slope.difficulty }}</p>
+{#                                    {% if slope.schedule %}#}
+{#                                        <span class="text-bold">Schedule:</span>#}
+{#                                        {% for s in slope.schedule %}#}
+{#                                            {% if s.start_date.date|date('Y-m-d') < 'now'|date('Y-m-d') and s.end_date.date|date('Y-m-d') > 'now'|date('Y-m-d') %}#}
+{#                                                {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}#}
+{#                                                    <div class="flex flex-col">#}
+{#                                                        <span class="underline">{{ day|capitalize }}:</span>#}
+{#                                                        {% if s.schedule["#{day}_open_time"] %}#}
+{#                                                            <ul>#}
+{#                                                                <li>&bull; Opens#}
+{#                                                                    at: {{ s.schedule["#{day}_open_time"].date|date('H:i') }}#}
+{#                                                                </li>#}
+{#                                                                <li>&bull; Closes#}
+{#                                                                    at: {{ s.schedule["#{day}_close_time"].date|date('H:i') }}#}
+{#                                                                </li>#}
+{#                                                            </ul>#}
+{#                                                        {% else %}#}
+{#                                                            Closed#}
+{#                                                        {% endif %}#}
+{#                                                    </div>#}
+{#                                                {% endfor %}#}
+{#                                            {% endif %}#}
+{#                                        {% endfor %}#}
+{#                                    {% endif %}#}
                                 </div>
                                 <img class="object-cover rounded-lg absolute h-full z-[1]"
                                      src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg"
@@ -63,6 +87,30 @@
                         <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded hover:cursor-pointer">
                             <h3 class="uppercase text-[#4D4F51]"> lift n°{{ lift.id }}</h3>
                             <h3 class="capitalize">{{ lift.type }}</h3>
+                            {% if lift.schedule %}
+                                <span class="text-bold">Schedule:</span>
+                                {% for s in lift.schedule %}
+                                    {% if s.start_date.date|date('Y-m-d') < 'now'|date('Y-m-d') and s.end_date.date|date('Y-m-d') > 'now'|date('Y-m-d') %}
+                                        {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
+                                            <div class="flex flex-col">
+                                                <span class="underline">{{ day|capitalize }}:</span>
+                                                {% if s.schedule["#{day}_open_time"] %}
+                                                    <ul>
+                                                        <li>&bull; Opens
+                                                            at: {{ s.schedule["#{day}_open_time"].date|date('H:i') }}
+                                                        </li>
+                                                        <li>&bull; Closes
+                                                            at: {{ s.schedule["#{day}_close_time"].date|date('H:i') }}
+                                                        </li>
+                                                    </ul>
+                                                {% else %}
+                                                    Closed
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
@@ -89,7 +137,8 @@
 
         </div>
         <div class="h-full w-3/12 ml-8 lg:flex relative hidden">
-            <div id="fond" class="bg-no-repeat bg-cover bg-center text-white rounded-xl p-4 w-full fixed w-[20vw] top-24 right-8">
+            <div id="fond"
+                 class="bg-no-repeat bg-cover bg-center text-white rounded-xl p-4 w-full fixed w-[19vw] top-24 right-8">
                 {% for weatherReport in weatherReports %}
                     <p>Temperature : {{ weatherReport.temperature }}°C</p>
                     <p>{{ weatherReport.temperatureRange }}</p>
