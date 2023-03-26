@@ -22,8 +22,8 @@
                          src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg" alt="montagne">
 
                 </div>
-                <div class="ss:hidden sm:hidden lg:flex lg:w-[15vw] tab:w-[35vw] w-[50vw] justify-between items-center">
-                    <h3 class=" font-semibold sm:text-2xl ss:text-base lg:text-base">{{ station.StationName }}</h3>
+                <div class="ss:hidden sm:hidden lg:flex lg:w-[15vw] tab:w-[35vw] w-[50vw] justify-between items-center mt-4">
+                    <h3 class=" font-semibold sm:text-2xl ss:text-base lg:text-sm">{{ station.StationName }}</h3>
                     <ion-icon class="ss:text-base sm:text-2xl" name="arrow-forward-outline"></ion-icon>
                 </div>
             </div>
@@ -32,8 +32,8 @@
     </div>
 
     {% if favorite_stations %}
-    <div class="flex flex-col mt-12">
-        <h2 class="text-2xl font-semibold mb-6">Favorite stations</h2>
+    <div class="flex flex-col mt-12 mb-20">
+        <h2 class="text-base font-semibold mb-6">Favorite stations</h2>
         {% for station in favorite_stations %}
             <div class="flex-col justify-items-center">
                 <div class="  flex flex-col rounded-lg tab:w-[40vw] tab:h-[40vw] w-[50vw] lg:w-[15vw] lg:h-[40vh] h-[40vh] relative items-center justify-end ">
@@ -48,8 +48,8 @@
                          src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg" alt="montagne">
 
                 </div>
-                <div class="ss:hidden sm:hidden lg:flex lg:w-[15vw] tab:w-[35vw] w-[50vw] justify-between items-center">
-                    <h3 class=" font-semibold sm:text-2xl ss:text-base lg:text-base">{{ station.station }}</h3>
+                <div class="ss:hidden sm:hidden lg:flex lg:w-[15vw] tab:w-[35vw] w-[50vw] justify-between items-center mt-4">
+                    <h3 class=" font-semibold sm:text-2xl ss:text-base lg:text-sm">{{ station.station }}</h3>
                     <ion-icon class="ss:text-base sm:text-2xl" name="arrow-forward-outline"></ion-icon>
                 </div>
             </div>
