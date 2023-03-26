@@ -24,6 +24,7 @@ class UserCrudController extends AbstractCrudController
             return [
                 TextField::new('station_name'),
                 TextField::new('email'),
+                TextField::new('password'),
                 ChoiceField::new('roles')
                     ->setChoices([
                         'Super Admin' => 'ROLE_SUPER_ADMIN',
