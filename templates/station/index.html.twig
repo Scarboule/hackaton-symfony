@@ -44,43 +44,43 @@
                 <div class="flex mt-6 snap-x snap-mandatory overflow-y-hidden">
                     <div class=" snap-start shrink-0 flex flex-row">
                         {% for slope in slopes %}
-                            <div class="mr-8 flex flex-col rounded-lg w-[50vw] lg:w-[15vw] lg:h-[40vh] h-[40vh] relative items-center justify-end ">
+                            <div class="mr-8 flex flex-col rounded-lg w-[50vw] lg:w-[15vw] lg:min-h-[40vh] min-h-[40vh] relative items-center justify-end ">
                                 <div class="z-[2] flex flex-col backdrop-blur rounded-lg mb-4 w-10/12 text-[#4D4F51] p-2">
                                     <h3 class="uppercase text-[#3979F6] font-bold">{{ slope.name }}</h3>
                                     <p class="capitalize"> difficulty : {{ slope.difficulty }}</p>
-{#                                    {% if slope.isManualOpen %}#}
-{#                                        <h3>Exceptionally open</h3>#}
-{#                                    {% endif %}#}
-{#                                    {% if slope.isManualClose %}#}
-{#                                        <h3>Exceptionally closed</h3>#}
-{#                                    {% endif %}#}
-{#                                    {% if slope.message != '' %}#}
-{#                                        <p>{{ slope.message }}</p>#}
-{#                                    {% endif %}#}
-{#                                    {% if slope.schedule %}#}
-{#                                        <span class="text-bold">Schedule:</span>#}
-{#                                        {% for s in slope.schedule %}#}
-{#                                            {% if s.start_date.date|date('Y-m-d') < 'now'|date('Y-m-d') and s.end_date.date|date('Y-m-d') > 'now'|date('Y-m-d') %}#}
-{#                                                {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}#}
-{#                                                    <div class="flex flex-col">#}
-{#                                                        <span class="underline">{{ day|capitalize }}:</span>#}
-{#                                                        {% if s.schedule["#{day}_open_time"] %}#}
-{#                                                            <ul>#}
-{#                                                                <li>&bull; Opens#}
-{#                                                                    at: {{ s.schedule["#{day}_open_time"].date|date('H:i') }}#}
-{#                                                                </li>#}
-{#                                                                <li>&bull; Closes#}
-{#                                                                    at: {{ s.schedule["#{day}_close_time"].date|date('H:i') }}#}
-{#                                                                </li>#}
-{#                                                            </ul>#}
-{#                                                        {% else %}#}
-{#                                                            Closed#}
-{#                                                        {% endif %}#}
-{#                                                    </div>#}
-{#                                                {% endfor %}#}
-{#                                            {% endif %}#}
-{#                                        {% endfor %}#}
-{#                                    {% endif %}#}
+                                    {% if slope.isManualOpen %}
+                                        <h3>Exceptionally open</h3>
+                                    {% endif %}
+                                    {% if slope.isManualClose %}
+                                        <h3>Exceptionally closed</h3>
+                                    {% endif %}
+                                    {% if slope.message != '' %}
+                                        <p>{{ slope.message }}</p>
+                                    {% endif %}
+                                    {% if slope.schedule %}
+                                        <span class="text-bold">Schedule:</span>
+                                        {% for s in slope.schedule %}
+                                            {% if s.start_date.date|date('Y-m-d') < 'now'|date('Y-m-d') and s.end_date.date|date('Y-m-d') > 'now'|date('Y-m-d') %}
+                                                {% for day in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] %}
+                                                    <div class="flex flex-col">
+                                                        <span class="underline">{{ day|capitalize }}:</span>
+                                                        {% if s.schedule["#{day}_open_time"] %}
+                                                            <ul>
+                                                                <li class="whitespace-nowrap">&bull; Opens
+                                                                    at: {{ s.schedule["#{day}_open_time"].date|date('H:i') }}
+                                                                </li>
+                                                                <li class="whitespace-nowrap">&bull; Closes
+                                                                    at: {{ s.schedule["#{day}_close_time"].date|date('H:i') }}
+                                                                </li>
+                                                            </ul>
+                                                        {% else %}
+                                                            Closed
+                                                        {% endif %}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
                                 </div>
                                 <img class="object-cover rounded-lg absolute h-full z-[1]"
                                      src="https://images.coinsecret.com/images/cs/cs2diapos/ski/50717273.jpg"
