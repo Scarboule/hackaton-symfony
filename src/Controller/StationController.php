@@ -7,29 +7,41 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class StationController extends AbstractController
 {
-    /*
-    #[Route('/station', name: 'station_index')]
-    public function index(UserRepository $userRepository): Response
+    /**
+     * @var Security
+     */
+    private $security;
+
+    public function __construct(Security $security)
     {
-        return $this->render('station/index.html.twig', [
-            'controller_name' => 'StationController',
-            'users' => $userRepository->findAll(),
-        ]);
-    }*/
+        $this->security = $security;
+    }
 
     #[Route('/station/{id}', name: 'station_index')]
     public function show($id, UserRepository $userRepository): Response
     {
         $station = $userRepository->find($id);
+        $favoriteStation = false;
+        if ($this->security->getUser()) {
+            $favoriteStations = $this->security->getUser()->getFavoriteStations();
+            foreach ($favoriteStations as $favorite) {
+                if ($favorite->getStation()->getId() === $station->getId()) {
+                    $favoriteStation = true;
+                }
+            }
+        }
+
         return $this->render('station/index.html.twig', [
             'station' => $station,
             'slopes' => $station->getSlopes(),
             'lifts' => $station->getLifts(),
             'shops' => $station->getShops(),
             'weatherReports' => $station->getWeatherReports(),
+            'favorite_station' => $favoriteStation
         ]);
     }
 
@@ -38,6 +50,15 @@ class StationController extends AbstractController
     {
         $station = $userRepository->find($id);
         $slopes = $station->getSlopes()->toArray();
+        $favoriteStation = false;
+        if ($this->security->getUser()) {
+            $favoriteStations = $this->security->getUser()->getFavoriteStations();
+            foreach ($favoriteStations as $favorite) {
+                if ($favorite->getId() === $station->getId()) {
+                    $favoriteStation = true;
+                }
+            }
+        }
 
         if ($sort === 'asc' or $sort === 'desc') {
             usort($slopes, function ($a, $b) {
@@ -60,6 +81,7 @@ class StationController extends AbstractController
             'lifts' => $station->getLifts(),
             'shops' => $station->getShops(),
             'weatherReports' => $station->getWeatherReports(),
+            'favorite_station' => $favoriteStation,
         ]);
     }
 
