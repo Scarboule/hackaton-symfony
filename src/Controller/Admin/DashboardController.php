@@ -38,7 +38,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Remontée mécanique', 'fa fa-elevator', Lift::class);
         yield MenuItem::linkToCrud('Objets perdus', 'fa fa-magnifying-glass', LostAndFoundObject::class);
         if (in_array('ROLE_SUPER_ADMIN', $this->getUser()->getRoles())) {
-            yield MenuItem::linkToCrud('Types de pistes', 'fa fa-shapes', LiftType::class);
+            yield MenuItem::linkToCrud('Types de remontées', 'fa fa-shapes', LiftType::class);
         }
     }
 }
