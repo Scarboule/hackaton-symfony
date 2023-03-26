@@ -1,0 +1,11 @@
+
+<!-- ======= Header ======= -->
+<header class="flex flex-row h-16 mx-auto items-center w-screen justify-between px-16 fixed top-0 left-0 z-20 bg-[#F3F6F9]">
+    <div class=" flex flex-row w-full  justify-between h-full items-center">
+
+        <h1 class="logo text-[#4D4F51] font-bold lg:w-2/12 -ml-8 lg:ml-0 w-5/12 text-sm lg:text-base"><a href="{{ path('app_index') }}">Espace Diamant</a></h1>
+
+        {{ render (controller('App\\Controller\\MenuController::nav')) }}
+
+    </div>
+</header>

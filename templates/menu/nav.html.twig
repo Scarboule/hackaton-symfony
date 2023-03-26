@@ -1,0 +1,45 @@
+
+<nav class="flex flex-row justify-between h-full w-10/12 items-center">
+
+    <div class="flex items-center h-10">
+        <a class="ui items-center flex" href="{{ path('app_index') }}">
+            <span class=" items-center flex text-[#4D4F51]">Stations <ion-icon name="chevron-down-outline hidden" class="ml-1"></ion-icon>
+            </span>
+        </a>
+    </div>
+
+    <div class="relative flex dropdown">
+        <a class="ui bg-[#3979F6] py-2 px-4 rounded-md items-center flex h-10" href="#">
+            <span class=" text-white items-center flex h-full">Account <ion-icon class="ml-4 w-6 h-6 text-white" name="person-outline"></ion-icon>
+            </span>
+        </a>
+        <div class="dropdown-content rounded-md items-center flex flex-row py-2 px-4 w-25 h-10 absolute top-12 left-0 w-full bg-white hidden">
+            {% if app.user %}
+            <a href="/logout" class="items-center flex flex-row">
+                <span class="items-center flex flex-row h-6 text-[#939393]">Logout <ion-icon class="ml-8 w-6 h-6 text-[#3979F6]" name="log-out-outline"></ion-icon></span>
+            </a>
+            {% else %}
+            <a href="/login" class="items-center flex flex-row">
+                <span class="items-center flex flex-row h-6 text-[#939393]">Login <ion-icon class="ml-8 w-6 h-6 text-[#3979F6]" name="log-in-outline"></ion-icon></span>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+</nav><!-- .navbar -->
+
+<script>
+
+  var dropdown = document.querySelector(".dropdown");
+  var dropdownContent = document.querySelector(".dropdown-content");
+
+  // Gestionnaire d'événement pour afficher/cacher le menu déroulant
+  dropdown.addEventListener("click", function() {
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+
+</script>
