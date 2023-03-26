@@ -87,6 +87,15 @@
                         <div class="flex flex-col bg-white text-md py-1 px-3 flex text-[#939393] rounded hover:cursor-pointer">
                             <h3 class="uppercase text-[#4D4F51]"> lift n°{{ lift.id }}</h3>
                             <h3 class="capitalize">{{ lift.type }}</h3>
+                            {% if lift.isManualOpen %}
+                                <h3>Exceptionally open</h3>
+                            {% endif %}
+                            {% if lift.isManualClose %}
+                                <h3>Exceptionally closed</h3>
+                            {% endif %}
+                            {% if lift.message != '' %}
+                                <p>{{ lift.message }}</p>
+                            {% endif %}
                             {% if lift.schedule %}
                                 <span class="text-bold">Schedule:</span>
                                 {% for s in lift.schedule %}
